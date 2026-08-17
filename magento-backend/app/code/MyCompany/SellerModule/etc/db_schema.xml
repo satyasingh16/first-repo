@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="seller_entity" resource="default" engine="innodb" comment="Seller Entity Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Seller Name"/>
+        <column xsi:type="varchar" name="email" nullable="false" length="255" comment="Seller Email"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="seller_product" resource="default" engine="innodb" comment="Seller Product Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="seller_id" padding="10" unsigned="true" nullable="false" comment="Seller ID"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SELLER_PRODUCT_SELLER_ID_SELLER_ENTITY_ENTITY_ID" table="seller_product" column="seller_id" referenceTable="seller_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="seller_order" resource="default" engine="innodb" comment="Seller Order Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="seller_id" padding="10" unsigned="true" nullable="false" comment="Seller ID"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" comment="Order ID"/>
+        <column xsi:type="decimal" name="commission" scale="4" precision="12" nullable="false" comment="Commission"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SELLER_ORDER_SELLER_ID_SELLER_ENTITY_ENTITY_ID" table="seller_order" column="seller_id" referenceTable="seller_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="seller_payment" resource="default" engine="innodb" comment="Seller Payment Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="seller_id" padding="10" unsigned="true" nullable="false" comment="Seller ID"/>
+        <column xsi:type="decimal" name="amount" scale="4" precision="12" nullable="false" comment="Payment Amount"/>
+        <column xsi:type="timestamp" name="payment_date" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Payment Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SELLER_PAYMENT_SELLER_ID_SELLER_ENTITY_ENTITY_ID" table="seller_payment" column="seller_id" referenceTable="seller_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+</schema>

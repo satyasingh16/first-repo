@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MyCompany\SellerModule\Api\SellerManagementInterface" type="MyCompany\SellerModule\Model\SellerManagement" />
+    <preference for="MyCompany\SellerModule\Api\Data\ProductInterface" type="MyCompany\SellerModule\Model\SellerProduct" />
+    <preference for="MyCompany\SellerModule\Api\Data\OrderInterface" type="MyCompany\SellerModule\Model\SellerOrder" />
+    <preference for="MyCompany\SellerModule\Api\Data\PaymentInterface" type="MyCompany\SellerModule\Model\SellerPayment" />
+</config>
